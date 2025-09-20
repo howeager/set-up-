@@ -1,0 +1,14 @@
+Get-SmbServerConfiguration | Select-Object EnableSMB1Protocol, EnableSMB2Protocol
+
+Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol
+
+Restart-Computer
+
+Alternatively, use the GUI:
+
+Open Server Manager > Manage > Remove Roles and Features.
+On the Features page, uncheck SMB 1.0/CIFS File Sharing Support.
+Complete the wizard and restart.
+
+Set-SmbServerConfiguration -MinDialectVersion 3.0 -MaxDialectVersion 3.1.1
+
